@@ -231,14 +231,14 @@ namespace WindowsFormsApp_15_Delegate
             List<Product> categoryFiltered = ProductFilter.Filter(products, c => c.Category == "가구");
 
             Console.WriteLine($"100000원 이상 제품");
-            foreach(Product p in priceFiltered)
+            foreach(var p in priceFiltered)
             {
                 Console.WriteLine(p.ToString());
             }
             Console.WriteLine($"가구 카테고리 제품");
-            foreach (Product p in categoryFiltered)
+            foreach (var p in categoryFiltered)
             {
-                Console.WriteLine(p.ToString());
+                Console.WriteLine(p);
             }
         }
     }
