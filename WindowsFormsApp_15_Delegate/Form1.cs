@@ -216,6 +216,30 @@ namespace WindowsFormsApp_15_Delegate
             //5-4. Action 사용 - void 반환 람다
             Action<string> callName = name => Console.WriteLine($"3. {name}님 안녕하세요");
             callName("Damon");
+
+            Console.WriteLine("\n========================");
+            //EX
+            List<Product> products = new List<Product>
+            {
+                new Product("TV", 200000, "가전"),
+                new Product("Sofa", 150000, "가구"),
+                new Product("Radio", 50000, "가전"),
+                new Product("Oven", 120000, "가전"),
+                new Product("Lamp", 30000, "가구")
+            };
+            List<Product> priceFiltered = ProductFilter.Filter(products, p => p.Price >= 100000);
+            List<Product> categoryFiltered = ProductFilter.Filter(products, c => c.Category == "가구");
+
+            Console.WriteLine($"100000원 이상 제품");
+            foreach(Product p in priceFiltered)
+            {
+                Console.WriteLine(p.ToString());
+            }
+            Console.WriteLine($"가구 카테고리 제품");
+            foreach (Product p in categoryFiltered)
+            {
+                Console.WriteLine(p.ToString());
+            }
         }
     }
 }
