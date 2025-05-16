@@ -115,7 +115,6 @@ namespace WindowsFormsApp_15_Delegate
         {
             Console.WriteLine("[3] 관리자에게 알람을 보냅니다.");
         }
-
         public Form1()
         {
             InitializeComponent();
