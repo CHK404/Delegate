@@ -96,9 +96,6 @@ namespace WindowsFormsApp_15_Delegate
         public class EventManager
         {
             IDictionary<string, EventDelegate> Event = new Dictionary<string, EventDelegate>();
-            public event EventDelegate AddEvent;
-            public event EventDelegate DeleteEvent;
-            public event EventDelegate StartEvent;
             public void addEvent(string EventName, EventDelegate ED)
             {
                 if (!Event.ContainsKey(EventName))
@@ -117,9 +114,13 @@ namespace WindowsFormsApp_15_Delegate
             {
                 if (Event.ContainsKey(EventName))
                 {
-                    Event[EventName].Invoke();
+                    Event[EventName]?.Invoke();
                 }
             }
         }
+
+        //del() - 델리게이트 실행(축약)
+        //del.Invoke() - 델리게이트 실행(정식)
+        //del?.Invoke() - 등록된 함수가 존재할 경우에만 실행(null값 판별)
     }
 }
