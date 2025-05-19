@@ -17,6 +17,7 @@ namespace WindowsFormsApp_15_Delegate
     //1) event 키워드 사용
     public delegate void Notify2();
 
+    public delegate void EventDelegate();
     public partial class Form2 : Form
     {
         //2. 메서드 정의
@@ -44,6 +45,10 @@ namespace WindowsFormsApp_15_Delegate
             //5) Event 델리게이트 실행
             //alarm2.OnRing();    //컴파일 오류
             alarm2.Trigger();   //클래스 내부 메서드만 실행 가능 -> 안전
+            
+            //ex
+            EventManager event1 = new EventManager();
+            event1.addEvent("alarm", AlarmMessage);
         }
         //3. 클래스 정의
         public class Alarm
@@ -86,5 +91,35 @@ namespace WindowsFormsApp_15_Delegate
          * 2. 직접 이벤트를 만들고 싶을 때 -> event 키워드 필요
          * 
          */
+
+        //ex
+        public class EventManager
+        {
+            IDictionary<string, EventDelegate> Event = new Dictionary<string, EventDelegate>();
+            public event EventDelegate AddEvent;
+            public event EventDelegate DeleteEvent;
+            public event EventDelegate StartEvent;
+            public void addEvent(string EventName, EventDelegate ED)
+            {
+                if (!Event.ContainsKey(EventName))
+                {
+                    Event.Add(EventName, ED);
+                }
+            }
+            public void deleteEvent(string EventName)
+            {
+                if (Event.ContainsKey(EventName))
+                {
+                    Event.Remove(EventName);
+                }
+            }   
+            public void startEvent(string EventName)
+            {
+                if (Event.ContainsKey(EventName))
+                {
+                    Event[EventName].Invoke();
+                }
+            }
+        }
     }
 }
